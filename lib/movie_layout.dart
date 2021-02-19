@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 import 'package:http/http.dart' as http;
 import 'package:movie/search.dart';
+import 'package:movie/transition_route.dart';
 import 'modal/choice.dart';
 import 'details_movie.dart';
 
@@ -38,7 +39,7 @@ class MoviesLayoutState extends State<MoviesLayout>
         backgroundColor: Colors.blueGrey[900],
         actions: <Widget>[
           IconButton(icon: Icon(Icons.search), onPressed: () {
-            Navigator.push(context,MaterialPageRoute(builder: (context) => SearchLayout()));
+            Navigator.push(context,TransitionRouteRight(widget: SearchLayout()));
           }),
         ],
         bottom: TabBar(
@@ -255,11 +256,7 @@ class ChoiceCardState extends State<ChoiceCard> {
 
     );
   }
-
-
 }
-
-
 
 const List<Choice> choices = const <Choice>[
   const Choice(title: 'Popular', keyword: "/popular"),

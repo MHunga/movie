@@ -5,6 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:movie/search.dart';
+import 'package:movie/test/test_scroll.dart';
+import 'package:movie/test/transform.dart';
+import 'package:movie/transition_route.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'details_movie.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
@@ -20,6 +23,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Movie example",
       home: MyStatefulWidget(),
+      //TransformDemo(),
+     // MyHomePage(),
     );
   }
 }
@@ -167,7 +172,8 @@ class DiscoverLayoutState extends State<DiscoverLayout> {
       appBar: AppBar(
           leading: Builder(builder: (BuildContext context) {
             return IconButton(icon: Icon(Icons.filter_list), onPressed: () {
-              Navigator.push(context,MaterialPageRoute(builder: (context) => FilterLayout()));
+              Navigator.push(context,
+                 TransitionRouteLeft(widget: FilterLayout()));
             });
           }),
           title: Text("Discover"),
@@ -175,12 +181,11 @@ class DiscoverLayoutState extends State<DiscoverLayout> {
           backgroundColor: Colors.blueGrey[900],
           actions: <Widget>[
             IconButton(icon: Icon(Icons.search), onPressed: () {
-              Navigator.push(context,MaterialPageRoute(builder: (context) => SearchLayout()));
+              Navigator.push(context,TransitionRouteRight(widget: SearchLayout()));
             }),
           ]),
       body: RefreshIndicator(
         onRefresh: _refresh,
-
             child: GridView.builder(
                 controller: new ScrollController(keepScrollOffset: false),
                 itemCount: data == null ? 0 : data.length,
@@ -198,7 +203,6 @@ class DiscoverLayoutState extends State<DiscoverLayout> {
                     child: GestureDetector(
                       onTap: (){
                        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsMovie(passData: data[index]['id'].toString())));
-
                       },
                       child: Stack(
                         children: <Widget>[

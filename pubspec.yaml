@@ -28,7 +28,7 @@ dependencies:
   flutter_circular_chart: ^0.1.0
   flutter_rating_bar: ^3.0.1+1
   auto_size_text: ^2.1.0
-  youtube_api: ^0.7.2
+  youtube_api: ^0.8.0
   youtube_player_flutter: ^6.1.1
   flappy_search_bar: ^1.7.2
   expandable: ^4.1.4

@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class AnimateTitle extends StatefulWidget {
 final ScrollController scrollController;
@@ -15,6 +16,7 @@ class AnimateTitleState extends State<AnimateTitle> {
   get offset => widget.scrollController.hasClients?widget.scrollController.offset:0;
   bool _isScroll = false;
   bool _isScroll2 = true;
+  bool _checkDuration = false;
 @override
   void initState() {
   widget.scrollController.addListener(_listenToScrollChange);
@@ -26,11 +28,11 @@ class AnimateTitleState extends State<AnimateTitle> {
       animation: widget.scrollController,
       builder: (context, child) {
         return AnimatedPositioned(
-          duration: Duration(milliseconds: 200),
+          duration: _isScroll2?(widget.scrollController.position.userScrollDirection == ScrollDirection.reverse?Duration(milliseconds: 0):Duration(milliseconds: 200)): Duration(milliseconds: 200),
           top:_isScroll2?(MediaQuery.of(context).padding.top+AppBar().preferredSize.height-widget.scrollController.offset/3) : (_isScroll? MediaQuery.of(context).padding.top+15: MediaQuery.of(context).padding.top+AppBar().preferredSize.height),
           left: _isScroll?50 :170,
           child: AnimatedContainer(
-            duration: Duration(milliseconds: 500),
+            duration: Duration(milliseconds: 200),
             height:(_isScroll?AppBar().preferredSize.height-30:70),
 
             child: Container(
@@ -56,18 +58,20 @@ class AnimateTitleState extends State<AnimateTitle> {
   }
 
   void _listenToScrollChange() {
+
    if(widget.scrollController.offset>=100&&!_isScroll&&_isScroll2){
       setState(() {
         _isScroll = true;
         _isScroll2 = false;
+
       });
     }
-    else if(widget.scrollController.offset<100&&_isScroll){
-      setState(() {
-        _isScroll2 = true;
-        _isScroll = false;
-      });
-    }
+    else if(widget.scrollController.offset<100&&_isScroll) {
+     setState(() {
+       _isScroll2 = true;
+       _isScroll = false;
+     });
+   }
 
   }
 }

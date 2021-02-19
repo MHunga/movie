@@ -49,86 +49,86 @@ class TagLayoutState extends State<TagLayout> {
     double _widthContainerTitle = (_screenSize - 180);
     return list == null
         ? Scaffold(
-            body: Center(child: new CircularProgressIndicator()),
-          )
+      body: Center(child: new CircularProgressIndicator()),
+    )
         : Scaffold(
-            backgroundColor: Colors.transparent,
-            body: Stack(
-              children: <Widget>[
-                CustomScrollView(
-                  controller: _scrollController,
-                  slivers: <Widget>[
-                    SliverAppBar(
-                      backgroundColor: Colors.black,
-                      expandedHeight: 220,
-                      pinned: true,
-                      flexibleSpace: new FlexibleSpaceBar(
-                          background: Container(
-                        decoration: new BoxDecoration(
-                            color: Colors.black,
-                            image: new DecorationImage(
-                                fit: BoxFit.cover,
-                                colorFilter: new ColorFilter.mode(
-                                    Colors.black.withOpacity(0.3),
-                                    BlendMode.dstATop),
-                                image: new NetworkImage(widget.backdropPath ==
-                                            null ||
-                                        widget.backdropPath.isEmpty
-                                    ? 'https://freecinema.info/assets/img/film-placeholder.png'
-                                    : 'https://image.tmdb.org/t/p/original' +
-                                        widget.backdropPath))),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.only(left: 30, top: 90),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: FadeInImage.assetNetwork(
-                                      placeholder: "",
-                                      placeholderCacheHeight: 200,
-                                      image: widget.posterPath == null ||
-                                              widget.posterPath.isEmpty
-                                          ? 'https://freecinema.info/assets/img/film-placeholder.png'
-                                          : 'https://image.tmdb.org/t/p/original' +
-                                              widget.posterPath,
-                                      height: 150,
-                                    ),
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        children: <Widget>[
+          CustomScrollView(
+            controller: _scrollController,
+            slivers: <Widget>[
+              SliverAppBar(
+                backgroundColor: Colors.black,
+                expandedHeight: 220,
+                pinned: true,
+                flexibleSpace: new FlexibleSpaceBar(
+                    background: Container(
+                      decoration: new BoxDecoration(
+                          color: Colors.black,
+                          image: new DecorationImage(
+                              fit: BoxFit.cover,
+                              colorFilter: new ColorFilter.mode(
+                                  Colors.black.withOpacity(0.3),
+                                  BlendMode.dstATop),
+                              image: new NetworkImage(widget.backdropPath ==
+                                  null ||
+                                  widget.backdropPath.isEmpty
+                                  ? 'https://freecinema.info/assets/img/film-placeholder.png'
+                                  : 'https://image.tmdb.org/t/p/original' +
+                                  widget.backdropPath))),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.only(left: 30, top: 90),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: FadeInImage.assetNetwork(
+                                    placeholder: "",
+                                    placeholderCacheHeight: 200,
+                                    image: widget.posterPath == null ||
+                                        widget.posterPath.isEmpty
+                                        ? 'https://freecinema.info/assets/img/film-placeholder.png'
+                                        : 'https://image.tmdb.org/t/p/original' +
+                                        widget.posterPath,
+                                    height: 150,
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      )),
-                    ),
-                    SliverToBoxAdapter(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10))),
-                        child: ListView.builder(
-                          itemBuilder: itembuilder,
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: list.length,
-                        ),
+                          ),
+                        ],
                       ),
-                    )
-                  ],
+                    )),
+              ),
+              SliverToBoxAdapter(
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10))),
+                  child: ListView.builder(
+                    itemBuilder: itembuilder,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: list.length,
+                  ),
                 ),
-                AnimateTitle(
-                  scrollController: _scrollController,
-                  title: "The other ${widget.title} movies",
-                )
-              ],
-            ),
-          );
+              )
+            ],
+          ),
+          AnimateTitle(
+            scrollController: _scrollController,
+            title: "The other ${widget.title} movies",
+          )
+        ],
+      ),
+    );
   }
 
   Widget itembuilder(BuildContext context, int index) {
@@ -148,10 +148,10 @@ class TagLayoutState extends State<TagLayout> {
                   placeholder: "assets/images/null_image.png",
                   placeholderCacheHeight: 150,
                   image: list[index]['poster_path'] == null ||
-                          list[index]['poster_path'].isEmpty
+                      list[index]['poster_path'].isEmpty
                       ? 'https://freecinema.info/assets/img/film-placeholder.png'
                       : 'https://image.tmdb.org/t/p/original' +
-                          list[index]['poster_path'],
+                      list[index]['poster_path'],
                   height: 150,
                 ),
               ),
@@ -170,19 +170,19 @@ class TagLayoutState extends State<TagLayout> {
                             Navigator.pop(context);
                           },
                           child: Hero(tag: list[index]['id'],
-                              child:  ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: FadeInImage.assetNetwork(
-                                  placeholder: "assets/images/null_image.png",
-                                  placeholderCacheHeight: 150,
-                                  image: list[index]['poster_path'] == null ||
-                                      list[index]['poster_path'].isEmpty
-                                      ? 'https://freecinema.info/assets/img/film-placeholder.png'
-                                      : 'https://image.tmdb.org/t/p/original' +
-                                      list[index]['poster_path'],
-                                  height: 150,
-                                ),
-                              ),),
+                            child:  ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: FadeInImage.assetNetwork(
+                                placeholder: "assets/images/null_image.png",
+                                placeholderCacheHeight: 150,
+                                image: list[index]['poster_path'] == null ||
+                                    list[index]['poster_path'].isEmpty
+                                    ? 'https://freecinema.info/assets/img/film-placeholder.png'
+                                    : 'https://image.tmdb.org/t/p/original' +
+                                    list[index]['poster_path'],
+                                height: 150,
+                              ),
+                            ),),
                         ),
                       ),
                     );
@@ -213,7 +213,7 @@ class TagLayoutState extends State<TagLayout> {
                         //minFontSize: 18,
                         maxLines: 2,
                       ),
-                    SizedBox(height: 15,),
+                      SizedBox(height: 15,),
                       Container(
                         margin: EdgeInsets.only(top: 8),
                         child: Row(

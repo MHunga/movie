@@ -90,7 +90,8 @@ class DetailsMovieState extends State<DetailsMovie> {
                  scrollDirection: Axis.vertical,
                  controller: _scrollController,
                  slivers: <Widget>[
-                   new SliverAppBar(backgroundColor: Colors.black,
+                   new SliverAppBar(
+                     backgroundColor: Colors.black,
                      expandedHeight: 300,
                      pinned: true,
 
